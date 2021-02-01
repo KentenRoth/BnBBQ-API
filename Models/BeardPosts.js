@@ -1,6 +1,9 @@
-const { truncate } = require('fs');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
+// Will need added later
+// featured Image
+// other Images
 
 const BeardPostSchema = new Schema({
 	created: {
