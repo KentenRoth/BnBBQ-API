@@ -1,0 +1,31 @@
+{
+	"name": "bnbbq",
+	"version": "1.0.0",
+	"description": "",
+	"main": "server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node server.js",
+		"dev": "./node_modules/.bin/env-cmd -f ./config/dev.env node Server/server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/KentenRoth/BnBBQ.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/KentenRoth/BnBBQ/issues"
+	},
+	"homepage": "https://github.com/KentenRoth/BnBBQ#readme",
+	"dependencies": {
+		"body-parser": "^1.19.0",
+		"express": "^4.17.1",
+		"jsonwebtoken": "^8.5.1",
+		"mongodb": "^3.6.3",
+		"mongoose": "^5.11.14"
+	},
+	"devDependencies": {
+		"env-cmd": "^10.1.0"
+	}
+}
