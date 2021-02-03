@@ -7,8 +7,10 @@ const Schema = mongoose.Schema;
 // Other Images
 // Tags - Array
 // Categories - Array
+// Ingredients
+// TLDR
 
-const BeardPostSchema = new Schema({
+const PostSchema = new Schema({
 	created: {
 		type: Number,
 		default: Date.now,
@@ -25,4 +27,4 @@ const BeardPostSchema = new Schema({
 	},
 });
 
-module.exports = BeardPost = mongoose.model('BeardPost', BeardPostSchema);
+module.exports = Post = mongoose.model('Post', PostSchema);
