@@ -2,8 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Will need added later
-// featured Image
-// other Images
+// Look into ways to hold and store images.
+// Featured Image
+// Other Images
+// Tags - Array
+// Categories - Array
 
 const BeardPostSchema = new Schema({
 	created: {
