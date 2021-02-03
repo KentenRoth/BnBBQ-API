@@ -2,6 +2,8 @@ const express = require('express');
 const router = new express.Router();
 const Post = require('../Models/Post');
 
+// Need authentication to Post, Delete, or Edit
+
 router.post('/posts', async (req, res) => {
 	const post = new Post(req.body);
 	try {
