@@ -5,9 +5,6 @@ const Schema = mongoose.Schema;
 // Look into ways to hold and store images.
 // Featured Image
 // Other Images
-// Tags - Array
-// Categories - Array
-// Ingredients
 // TLDR
 
 const PostSchema = new Schema({
@@ -25,6 +22,38 @@ const PostSchema = new Schema({
 		type: String,
 		required: true,
 	},
+	TLDR: {
+		type: String,
+		trim: true,
+	},
+	categories: [
+		{
+			type: String,
+			default: 'No Category',
+			trim: true,
+		},
+	],
+	tags: [
+		{
+			type: String,
+			default: 'No Tag',
+			trim: true,
+		},
+	],
+	ingredients: [
+		{
+			type: String,
+			default: 'None',
+			trim: true,
+		},
+	],
+	ingredients2: [
+		{
+			type: String,
+			default: 'None',
+			trim: true,
+		},
+	],
 });
 
 module.exports = Post = mongoose.model('Post', PostSchema);
