@@ -22,10 +22,18 @@ const PostSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	TLDR: {
-		type: String,
-		trim: true,
-	},
+	steps: [
+		{
+			type: String,
+			trim: true,
+		},
+	],
+	TLDR: [
+		{
+			type: String,
+			trim: true,
+		},
+	],
 	categories: [
 		{
 			type: String,
