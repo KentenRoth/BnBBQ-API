@@ -17,4 +17,12 @@ router.post('/users', async (req, res) => {
 	}
 });
 
+// users/login still need to be able to login when admin page is created
+
+// users/logout still need to be able to logout when admin page is created
+
+// users/logoutAll will need this so I can logout all accounts if needed
+
+// users/me this will be needed to change/update password
+
 module.exports = router;

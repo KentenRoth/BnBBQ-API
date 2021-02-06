@@ -24,4 +24,12 @@ router.get('/posts', (req, res) => {
 		});
 });
 
+// Setup a get that will allow searching for posts
+
+// Need to be able to get by specific ID and read a single post
+
+// Need to be able to update and make edits to live posts
+
+// Need to be able to delete a post when admin page is created
+
 module.exports = router;
