@@ -22,6 +22,19 @@ const UserSchema = new Schema({
 	],
 });
 
+UserSchema.methods.createAuthToken = async function () {
+	const user = this;
+	const token = jwt.sign(
+		{ _id: user._id.toString() },
+		process.env.HIDDEN_SENTENCE
+	);
+
+	user.tokens = user.tokens.concat({ token });
+	await user.save();
+
+	return token;
+};
+
 UserSchema.pre('save', async function (next) {
 	const user = this;
 
@@ -31,5 +44,7 @@ UserSchema.pre('save', async function (next) {
 
 	next();
 });
+
+// Need to match password when logging in.  (findByCredentials)
 
 module.exports = User = mongoose.model('User', UserSchema);
