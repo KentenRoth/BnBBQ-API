@@ -1,5 +1,6 @@
 const express = require('express');
 const router = new express.Router();
+const auth = require('../Middleware/auth');
 const User = require('../Models/User');
 
 // Needs authentication added
@@ -26,5 +27,9 @@ router.post('/users', async (req, res) => {
 // users/logoutAll will need this so I can logout all accounts if needed
 
 // users/me this will be needed to change/update password
+
+router.get('/user/me', auth, async (req, res) => {
+	res.send(req.user);
+});
 
 module.exports = router;
