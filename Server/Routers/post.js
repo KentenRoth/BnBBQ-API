@@ -1,11 +1,15 @@
 const express = require('express');
 const router = new express.Router();
 const Post = require('../Models/Post');
+const auth = require('../Middleware/auth');
 
 // Need authentication to Post, Delete, or Edit
 
-router.post('/posts', async (req, res) => {
-	const post = new Post(req.body);
+router.post('/posts', auth, async (req, res) => {
+	const post = new Post({
+		...req.body,
+		owner: req.user._id,
+	});
 	try {
 		await post.save();
 		res.send(post);
