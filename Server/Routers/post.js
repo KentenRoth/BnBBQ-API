@@ -24,13 +24,24 @@ router.get('/posts', (req, res) => {
 			res.send(posts);
 		})
 		.catch((error) => {
-			res.status(500).send();
+			res.status(500).send(error);
 		});
 });
 
-// Setup a get that will allow searching for posts
+router.get('/posts/:id', async (req, res) => {
+	try {
+		const post = await Post.findOne({ _id: req.params.id });
 
-// Need to be able to get by specific ID and read a single post
+		if (!post) {
+			return res.status(404).send();
+		}
+		res.send(post);
+	} catch (error) {
+		res.status(500).send();
+	}
+});
+
+// Setup a get that will allow searching for posts
 
 // Need to be able to update and make edits to live posts
 
