@@ -46,5 +46,18 @@ router.get('/posts/:id', async (req, res) => {
 // Need to be able to update and make edits to live posts
 
 // Need to be able to delete a post when admin page is created
+router.delete('/posts/:id', auth, async (req, res) => {
+	try {
+		const post = await Post.findOneAndDelete({
+			_id: req.params.id,
+		});
+		if (!post) {
+			return res.status(404).send();
+		}
+		res.send(post);
+	} catch (error) {
+		return res.status(500).send();
+	}
+});
 
 module.exports = router;
