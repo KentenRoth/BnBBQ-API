@@ -18,8 +18,19 @@ router.post('/posts', auth, async (req, res) => {
 	}
 });
 
+// Searches for data in Title, Content, Categories, and Ingredients
 router.get('/posts', (req, res) => {
-	Post.find({})
+	const text = req.query.text;
+	if (text == null) {
+		return Post.find({})
+			.then((posts) => {
+				res.send(posts);
+			})
+			.catch((error) => {
+				res.status(500).send(error);
+			});
+	}
+	Post.find({ $text: { $search: text } })
 		.then((posts) => {
 			res.send(posts);
 		})
@@ -40,8 +51,6 @@ router.get('/posts/:id', async (req, res) => {
 		res.status(500).send();
 	}
 });
-
-// Setup a get that will allow searching for posts
 
 // Need to be able to update and make edits to live posts
 
