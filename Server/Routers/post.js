@@ -3,8 +3,7 @@ const router = new express.Router();
 const Post = require('../Models/Post');
 const auth = require('../Middleware/auth');
 
-// Need authentication to Post, Delete, or Edit
-
+// Posts new post
 router.post('/posts', auth, async (req, res) => {
 	const post = new Post({
 		...req.body,
@@ -18,6 +17,7 @@ router.post('/posts', auth, async (req, res) => {
 	}
 });
 
+// Gets posts
 // Searches for data in Title, Content, Categories, and Ingredients
 router.get('/posts', (req, res) => {
 	const text = req.query.text;
@@ -39,6 +39,7 @@ router.get('/posts', (req, res) => {
 		});
 });
 
+// Gets posts by the ID
 router.get('/posts/:id', async (req, res) => {
 	try {
 		const post = await Post.findOne({ _id: req.params.id });
@@ -53,8 +54,42 @@ router.get('/posts/:id', async (req, res) => {
 });
 
 // Need to be able to update and make edits to live posts
+router.patch('/posts/:id', auth, async (req, res) => {
+	const updates = Object.keys(req.body);
+	const thingsThatCanBeUpdated = [
+		'steps',
+		'TLDR',
+		'categories',
+		'tags',
+		'ingredients',
+		'ingredients2',
+		'title',
+		'content',
+	];
 
-// Need to be able to delete a post when admin page is created
+	const isValidUpdate = updates.every((update) =>
+		thingsThatCanBeUpdated.includes(update)
+	);
+
+	if (!isValidUpdate) {
+		return res.status(400).send({ error: 'Cannot update.' });
+	}
+
+	try {
+		const post = await Post.findOne({ _id: req.params.id });
+		if (!post) {
+			return res.status(404).send();
+		}
+		updates.forEach((update) => (post[update] = req.body[update]));
+		await post.save();
+
+		res.send(post);
+	} catch (error) {
+		res.status(500).send();
+	}
+});
+
+// Deletes single post
 router.delete('/posts/:id', auth, async (req, res) => {
 	try {
 		const post = await Post.findOneAndDelete({
