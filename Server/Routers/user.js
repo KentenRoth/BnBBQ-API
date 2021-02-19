@@ -34,9 +34,15 @@ router.post('/users/login', async (req, res) => {
 	}
 });
 
-// users/logout still need to be able to logout when admin page is created
-
-// users/logoutAll will need this so I can logout all accounts if needed
+router.post('/users/logoutAll', auth, async (req, res) => {
+	try {
+		req.user.tokens = [];
+		await req.user.save();
+		res.send();
+	} catch (error) {
+		res.status(500).send();
+	}
+});
 
 // users/me this will be needed to change/update password
 
