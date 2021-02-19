@@ -35,6 +35,22 @@ UserSchema.methods.createAuthToken = async function () {
 	return token;
 };
 
+UserSchema.statics.findByCredentials = async (email, password) => {
+	const user = await User.findOne({ email });
+
+	if (!user) {
+		throw new Error('Please check login info.');
+	}
+
+	const isMatch = await bcrypt.compare(password, user.password);
+
+	if (!isMatch) {
+		throw new Error('Please check login info.');
+	}
+
+	return user;
+};
+
 UserSchema.pre('save', async function (next) {
 	const user = this;
 
@@ -44,7 +60,5 @@ UserSchema.pre('save', async function (next) {
 
 	next();
 });
-
-// Need to match password when logging in.  (findByCredentials)
 
 module.exports = User = mongoose.model('User', UserSchema);

@@ -21,6 +21,18 @@ router.post('/users', async (req, res) => {
 });
 
 // users/login still need to be able to login when admin page is created
+router.post('/users/login', async (req, res) => {
+	try {
+		const user = await User.findByCredentials(
+			req.body.email,
+			req.body.password
+		);
+		const authToken = await user.createAuthToken();
+		res.send({ user, authToken });
+	} catch (error) {
+		res.status(400).send(error.message);
+	}
+});
 
 // users/logout still need to be able to logout when admin page is created
 
