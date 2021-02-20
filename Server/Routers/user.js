@@ -7,6 +7,7 @@ const User = require('../Models/User');
 // Need to remove ability to create new user once server is launched
 // Site will not have comments or mulitple users at launch to save DB space
 
+// Creates new user.
 router.post('/users', async (req, res) => {
 	const user = new User(req.body);
 
@@ -20,7 +21,7 @@ router.post('/users', async (req, res) => {
 	}
 });
 
-// users/login still need to be able to login when admin page is created
+// Logs into the account
 router.post('/users/login', async (req, res) => {
 	try {
 		const user = await User.findByCredentials(
@@ -34,6 +35,21 @@ router.post('/users/login', async (req, res) => {
 	}
 });
 
+// Logs out of current device
+router.post('/users/logout', auth, async (req, res) => {
+	try {
+		req.user.tokens = req.user.tokens.filter((token) => {
+			return token.token !== req.token;
+		});
+		await req.user.save();
+
+		res.send();
+	} catch (error) {
+		res.status(500).send();
+	}
+});
+
+// Logs out of all devices
 router.post('/users/logoutAll', auth, async (req, res) => {
 	try {
 		req.user.tokens = [];
@@ -43,8 +59,6 @@ router.post('/users/logoutAll', auth, async (req, res) => {
 		res.status(500).send();
 	}
 });
-
-// users/me this will be needed to change/update password
 
 router.get('/user/me', auth, async (req, res) => {
 	res.send(req.user);
