@@ -62,6 +62,14 @@ const PostSchema = new Schema({
 			trim: true,
 		},
 	],
+	time: {
+		type: String,
+		trim: true,
+	},
+	location: {
+		type: String,
+		trim: true,
+	},
 });
 
 module.exports = Post = mongoose.model('Post', PostSchema);
