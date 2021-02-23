@@ -1,4 +1,4 @@
-# BnBBQ_API
+# BnBBQ-API
 
 This will be the new home for a blog that I created.  
 
