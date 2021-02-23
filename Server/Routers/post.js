@@ -30,7 +30,7 @@ router.get('/posts', (req, res) => {
 				res.status(500).send(error);
 			});
 	}
-	console.log(text);
+
 	Post.find({ $text: { $search: text } })
 		.then((posts) => {
 			res.send(posts);
