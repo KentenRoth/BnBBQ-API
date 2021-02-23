@@ -20,7 +20,7 @@ router.post('/posts', auth, async (req, res) => {
 // Gets posts
 // Searches for data in Title, Content, Categories, and Ingredients
 router.get('/posts', (req, res) => {
-	const text = req.query.text;
+	const text = req.query.search;
 	if (text == null) {
 		return Post.find({})
 			.then((posts) => {
@@ -30,6 +30,7 @@ router.get('/posts', (req, res) => {
 				res.status(500).send(error);
 			});
 	}
+	console.log(text);
 	Post.find({ $text: { $search: text } })
 		.then((posts) => {
 			res.send(posts);
