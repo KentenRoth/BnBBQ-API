@@ -18,10 +18,12 @@ const PostSchema = new Schema({
 		required: true,
 		trim: true,
 	},
-	content: {
-		type: String,
-		required: true,
-	},
+	content: [
+		{
+			type: String,
+			required: true,
+		},
+	],
 	steps: [
 		{
 			type: String,
@@ -68,6 +70,11 @@ const PostSchema = new Schema({
 	},
 	location: {
 		type: String,
+		trim: true,
+	},
+	f_image: {
+		type: String,
+		required: true,
 		trim: true,
 	},
 });
