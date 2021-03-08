@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT;
 
 app.use(function (req, res, next) {
-	res.header('Access-Control-Allow-Origin', 'localhost:3000');
+	res.header('Access-Control-Allow-Origin', '*');
 	res.header(
 		'Access-Control-Allow-Methods',
 		'GET,HEAD,OPTIONS,POST,PUT,PATCH,DELETE'
