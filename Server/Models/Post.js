@@ -77,6 +77,11 @@ const PostSchema = new Schema({
 		required: true,
 		trim: true,
 	},
+	alt: {
+		type: String,
+		trim: true,
+		default: 'image',
+	},
 });
 
 module.exports = Post = mongoose.model('Post', PostSchema);

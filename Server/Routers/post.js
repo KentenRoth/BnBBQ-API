@@ -67,6 +67,7 @@ router.patch('/posts/:id', auth, async (req, res) => {
 		'title',
 		'content',
 		'f_image',
+		'alt',
 	];
 
 	const isValidUpdate = updates.every((update) =>
